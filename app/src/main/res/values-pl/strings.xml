@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_description">Nieoficjalna aplikacja do obsługi mobilnej wersji KKM na urządzeniach mobilnych.</string>
+
+    <!-- Splash activity -->
+    <string name="splash_logo">Logo mobileKKM</string>
+    <string name="splash_footer">Stopa tła</string>
+
+    <!-- Webview related strings -->
+    <string name="action_about">O aplikacji</string>
+    <string name="action_clear_cache">Wyczyść cache</string>
+    <string name="intent_chooser_file">Wybierz plik</string>
+    <string name="error_no_network">Brak połączenia z Internetem</string>
+    <string name="snackbar_retry">Spróbuj ponownie</string>
+    <string name="press_back_again">Naciśnij ponownie \"wstecz\", aby wyjść</string>
+    <string name="fab_brightness">Rozjaśnij ekran</string>
+
+    <!-- Attribouter screen -->
+    <string name="about_contact_us">Napisz do nas</string>
+    <string name="about_facebook_like">Polub nas</string>
+    <string name="attribouter_title_about">O aplikacji</string>
+    <string name="attribouter_title_licenses">Licencje open source</string>
+    <string name="attribouter_title_email">Adres e-mail</string>
+    <string name="attribouter_title_website">Strona internetowa</string>
+    <string name="attribouter_title_git">Repozytorium</string>
+    <string name="attribouter_title_version">Wersja %1$s</string>
+    <string name="attribouter_title_contributors">Współtwórcy</string>
+    <string name="attribouter_title_translators">Tłumacze</string>
+    <string name="attribouter_title_license">Licencja</string>
+    <string name="attribouter_title_license_permissions">Uprawnienia</string>
+    <string name="attribouter_title_license_conditions">Warunki</string>
+    <string name="attribouter_title_license_limitations">Ograniczenia</string>
+    <string name="attribouter_title_more_info">Więcej informacji</string>
+    <string name="attribouter_desc_licenses_legal">To nie jest porada prawna. Powyższa informacja ma na celu wyłącznie dostarczenie użytkownikowi ogólnych informacji na temat licencji open source. Licencje open source pozwalają na swobodne używanie, modyfikowanie i udostępnianie oprogramowania. Jednakże, nie są one wolne od wyjątków. Przed opublikowaniem oprogramowania należy zapoznać się z ograniczeniami wynikającymi z licencji, których używamy.</string>
+    <string name="about_role_lead">Główny programista</string>
+    <string name="about_role_proofreader">Korektor tłumaczeń</string>
+    <string name="about_role_ui_designer">Projektant UI</string>
+    <string name="about_role_icon_designer">Projektant ikonki</string>
+    <string name="about_role_copyright">Wszelkie prawa zastrzeżone</string>
+    <string name="about_bio_divadsn">21 lat, zamienia kofeinę i pizzę w kod. Wcześniej znany również jako Codebucket.</string>
+    <string name="about_bio_imintie">Druga połówka Davida Sn.</string>
+    <string name="about_bio_lumiqcreative">Wyprodukowanie złego produktu właśnie stało się trudniejsze.</string>
+</resources>
