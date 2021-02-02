@@ -11,7 +11,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="100dp"
         android:src="@drawable/ic_kkm_logo"
         android:contentDescription="@string/splash_logo"
         app:layout_constraintLeft_toLeftOf="parent"
