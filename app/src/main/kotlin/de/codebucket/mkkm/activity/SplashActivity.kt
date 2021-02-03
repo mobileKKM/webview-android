@@ -20,7 +20,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this@SplashActivity, WebViewActivity::class.java)
+            val intent = Intent(this@SplashActivity, MainActivity::class.java)
             launch(intent);
         }, 1500L)
     }
