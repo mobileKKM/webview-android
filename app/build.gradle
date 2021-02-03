@@ -23,8 +23,8 @@ android {
         applicationId "de.codebucket.mkkm"
 
         // These values are not intended to be shared public in repo!
-        ext.githubToken = localProps.getProperty('githubToken') ?: '"' + System.getenv("GITHUB_TOKEN") + '"'
-        buildConfigField "String", "GITHUB_TOKEN", ext.githubToken
+        def githubToken = localProps.getProperty('githubToken') ?: '"' + System.getenv("GITHUB_TOKEN") + '"'
+        buildConfigField "String", "GITHUB_TOKEN", githubToken
 
         versionCode 18
         versionName "1.3.0"
@@ -63,5 +63,5 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:2.0.4"
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     implementation "com.google.android.material:material:1.2.1"
-    implementation "me.jfenn:Attribouter:0.1.8"
+    implementation "com.github.mobileKKM:Attribouter:0.1.9"
 }
