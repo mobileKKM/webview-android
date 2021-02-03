@@ -1,10 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <!--Top level DayNight theme to be used in AndroidManifest.xml-->
     <style name="Theme.MobileKKM" parent="Theme.MobileKKM.Base" />
 
     <!-- Base application theme. -->
-    <style name="Theme.MobileKKM.Base" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.MobileKKM.Base" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!--Material color attributes -->
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryVariant">@color/color_primary_variant</item>
@@ -25,12 +26,7 @@
         <item name="android:navigationBarColor">@android:color/black</item>
     </style>
 
-    <style name="Theme.MobileKKM.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="Theme.MobileKKM.Launcher" parent="Theme.MobileKKM.NoActionBar">
+    <style name="Theme.MobileKKM.Launcher">
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@color/color_primary</item>
         <item name="android:windowTranslucentStatus">true</item>

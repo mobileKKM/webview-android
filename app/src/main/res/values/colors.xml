@@ -23,16 +23,10 @@
     <color name="color_on_surface">#000000</color>
     <color name="color_on_error">#FFFFFF</color>
 
-    <!-- Attribouter day theme colors -->
+    <!-- Attribouter theme colors -->
     <color name="attribouter_colorPrimary">@color/color_primary</color>
     <color name="attribouter_colorPrimaryDark">@color/color_primary_variant</color>
-    <color name="attribouter_windowInsetColor">@color/color_on_background</color>
-    <color name="attribouter_windowBackgroundColor">@color/color_background</color>
-
-    <!-- Attribouter night theme colors -->
-    <color name="attribouter_colorPrimary_night">@color/color_surface</color>
-    <color name="attribouter_colorPrimaryDark_night">@color/color_background</color>
-    <color name="attribouter_textColorAccent_night">@color/color_on_surface</color>
-    <color name="attribouter_windowBackgroundColor_night">@color/color_background</color>
+    <color name="attribouter_colorPrimary_night">@color/color_primary</color>
+    <color name="attribouter_colorPrimaryDark_night">@color/color_primary_variant</color>
 
 </resources>
