@@ -29,11 +29,13 @@
         </activity>
 
         <activity
-            android:name=".activity.WebViewActivity"
+            android:name=".activity.MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:launchMode="singleTask"
-            android:theme="@style/Theme.MobileKKM.NoActionBar" />
+            android:launchMode="singleTask" />
+
+        <activity android:name=".activity.AboutActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 

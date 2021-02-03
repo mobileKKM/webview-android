@@ -18,18 +18,17 @@ import com.google.android.material.snackbar.Snackbar
 
 import de.codebucket.mkkm.BuildConfig
 import de.codebucket.mkkm.R
-import de.codebucket.mkkm.databinding.ActivityWebviewBinding
+import de.codebucket.mkkm.databinding.ActivityMainBinding
+import me.jfenn.attribouter.Attribouter
 
-import me.jfenn.attribouter.attribouterActivity
-
-class WebViewActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     object Const {
         const val FILE_CHOOSER_RESULT_CODE = 100
         const val TIME_INTERVAL = 2000;
     }
 
-    private lateinit var binding: ActivityWebviewBinding
+    private lateinit var binding: ActivityMainBinding
 
     private var mFilePathCallback: ValueCallback<Array<Uri>>? = null
     private var mBackPressed: Long = 0
@@ -37,16 +36,13 @@ class WebViewActivity : AppCompatActivity() {
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityWebviewBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
         binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction(
-                "Action",
-                null
-            ).show()
+            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action",null).show()
         }
 
         val webview = binding.webview
@@ -96,11 +92,7 @@ class WebViewActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_about -> {
-                attribouterActivity {
-                    withFile(R.xml.attribouter)
-                    withGitHubToken(BuildConfig.GITHUB_TOKEN)
-                    withTheme(R.style.AttribouterTheme_DayNight)
-                }
+                startActivity(Intent(this@MainActivity, AboutActivity::class.java))
                 true
             }
             R.id.action_clear_cache -> {
