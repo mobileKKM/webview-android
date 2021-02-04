@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:paddingBottom="160dp"
+        android:paddingBottom="120dp"
         android:src="@drawable/ic_kkm_logo"
         android:contentDescription="@string/splash_logo" />
 
