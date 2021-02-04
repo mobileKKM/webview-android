@@ -21,6 +21,8 @@ import de.codebucket.mkkm.MobileKKM
 import de.codebucket.mkkm.R
 import de.codebucket.mkkm.databinding.ActivityMainBinding
 
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt
+
 class MainActivity : AppCompatActivity() {
 
     object Const {
@@ -42,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
-        binding.fab.setOnClickListener { view ->
+        binding.fab.setOnClickListener {
             val layout = window.attributes
 
             if (!mBrightnessToggled) {
@@ -78,6 +80,21 @@ class MainActivity : AppCompatActivity() {
 
         // Load the app
         webview.loadUrl("https://m.kkm.krakow.pl")
+
+        val preferences = MobileKKM.preferences
+        if (!preferences.getBoolean("tutorial_done", false) || MobileKKM.isDebug) {
+            MaterialTapTargetPrompt.Builder(this@MainActivity)
+                .setTarget(binding.fab)
+                .setPrimaryText(R.string.fab_prompt_title)
+                .setSecondaryText(R.string.fab_prompt_message)
+                .setCaptureTouchEventOutsidePrompt(true)
+                .setPromptStateChangeListener { _: MaterialTapTargetPrompt, state: Int ->
+                    if (state == MaterialTapTargetPrompt.STATE_FOCAL_PRESSED || state == MaterialTapTargetPrompt.STATE_DISMISSING) {
+                        preferences.edit().putBoolean("tutorial_done", true).apply()
+                    }
+                }
+                .show()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

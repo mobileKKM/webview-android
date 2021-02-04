@@ -14,6 +14,8 @@
     <string name="snackbar_retry">Spróbuj ponownie</string>
     <string name="press_back_again">Naciśnij ponownie \"wstecz\", aby wyjść</string>
     <string name="fab_brightness">Rozjaśnij ekran</string>
+    <string name="fab_prompt_title">Rozjaśnij ekran</string>
+    <string name="fab_prompt_message">Stuknij w żarówkę, aby rozjaśnić ekran podczas kontroli biletów</string>
 
     <!-- Update notifications -->
     <string name="update_notification_channel">Aktualizacje aplikacji</string>

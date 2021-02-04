@@ -103,4 +103,5 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     implementation "com.google.android.material:material:1.2.1"
     implementation "com.github.mobileKKM:Attribouter:0.1.9"
+    implementation "uk.co.samuelwall:material-tap-target-prompt:3.1.0"
 }

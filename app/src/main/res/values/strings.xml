@@ -14,7 +14,9 @@
     <string name="error_no_network">No Internet connection</string>
     <string name="snackbar_retry">Try again</string>
     <string name="press_back_again">Press \"back\" again to exit</string>
-    <string name="fab_brightness">Brighten up the screen</string>
+    <string name="fab_brightness">Brighten up the display</string>
+    <string name="fab_prompt_title">Brighten up the display</string>
+    <string name="fab_prompt_message">Tap the lightbulb to brighten up the display during ticket control</string>
 
     <!-- Update notifications -->
     <string name="update_notification_channel">App updates</string>
