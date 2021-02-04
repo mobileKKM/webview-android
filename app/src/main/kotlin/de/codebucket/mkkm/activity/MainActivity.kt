@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
     object Const {
         const val FILE_CHOOSER_RESULT_CODE = 100
-        const val TIME_INTERVAL = 2000;
+        const val TIME_INTERVAL = 2000
     }
 
     private lateinit var binding: ActivityMainBinding
@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
     private var mBrightnessToggled = false
     private var mBackPressed: Long = 0
 
+    @Suppress("DEPRECATION")
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         webview.webViewClient = KKMWebViewClient(this, binding)
 
         // Allow 3rd party cookies, otherwise remember me won't work
-        CookieManager.getInstance().setAcceptCookie(true);
+        CookieManager.getInstance().setAcceptCookie(true)
         CookieManager.getInstance().setAcceptThirdPartyCookies(webview, true)
 
         // Set webview settings for webapps
@@ -76,7 +77,7 @@ class MainActivity : AppCompatActivity() {
         webview.settings.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
 
         if (MobileKKM.isDebug) {
-            WebView.setWebContentsDebuggingEnabled(true);
+            WebView.setWebContentsDebuggingEnabled(true)
         }
 
         // Load the app
@@ -147,12 +148,12 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         // Press back to exit twice
         if (mBackPressed + Const.TIME_INTERVAL < System.currentTimeMillis()) {
-            Toast.makeText(this, R.string.press_back_again, Toast.LENGTH_SHORT).show();
-            mBackPressed = System.currentTimeMillis();
-            return;
+            Toast.makeText(this, R.string.press_back_again, Toast.LENGTH_SHORT).show()
+            mBackPressed = System.currentTimeMillis()
+            return
         }
 
-        super.onBackPressed();
+        super.onBackPressed()
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -160,15 +161,15 @@ class MainActivity : AppCompatActivity() {
 
         // Don't continue if someone tried to call activity without url
         if (intent == null || intent.data == null) {
-            return;
+            return
         }
 
-        var data = intent.data!!
+        val data = intent.data!!
 
         // Check if it contains both id and result parameters
         if (data.getQueryParameter("id") == null || data.getQueryParameter("result") == null) {
-            Snackbar.make(binding.swipe, R.string.no_payment, Snackbar.LENGTH_LONG).show();
-            return;
+            Snackbar.make(binding.swipe, R.string.no_payment, Snackbar.LENGTH_LONG).show()
+            return
         }
 
         when (data.getQueryParameter("result")) {

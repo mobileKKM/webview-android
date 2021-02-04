@@ -27,14 +27,9 @@ class SyncAdapter @JvmOverloads constructor(
 
     private var mAccountManager: AccountManager = AccountManager.get(context)
 
-    override fun onPerformSync(
-        account: Account?,
-        extras: Bundle?,
-        authority: String?,
-        provider: ContentProviderClient?,
-        syncResult: SyncResult?
-    ) {
-        Log.d(Const.TAG, "Starting sync...");
+    @Suppress("DEPRECATION")
+    override fun onPerformSync(account: Account?, extras: Bundle?, authority: String?, provider: ContentProviderClient?, syncResult: SyncResult?) {
+        Log.d(Const.TAG, "Starting sync...")
 
         val intent = Intent(context, SplashActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
@@ -54,10 +49,9 @@ class SyncAdapter @JvmOverloads constructor(
         if (Build.VERSION.SDK_INT >= 22) {
             mAccountManager.removeAccount(account, null, null, null)
         } else {
-            // noinspection deprecation
             mAccountManager.removeAccount(account, null, null)
         }
 
-        Log.d(Const.TAG, "Sync finished!");
+        Log.d(Const.TAG, "Sync finished!")
     }
 }

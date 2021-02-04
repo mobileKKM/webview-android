@@ -26,7 +26,7 @@ class SplashActivity : AppCompatActivity() {
             window.navigationBarColor = ContextCompat.getColor(this, R.color.color_primary)
             Handler(Looper.getMainLooper()).postDelayed({
                 val intent = Intent(this@SplashActivity, MainActivity::class.java)
-                launch(intent);
+                launch(intent)
             }, 800L)
         }
     }

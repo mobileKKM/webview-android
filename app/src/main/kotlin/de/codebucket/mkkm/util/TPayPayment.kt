@@ -38,7 +38,7 @@ class TPayPayment {
             }
 
             if (data.getQueryParameter("id") == null) {
-                throw IllegalArgumentException("Merchant id cannot be null");
+                throw IllegalArgumentException("Merchant id cannot be null")
             }
 
             var useEnglishParams = true
