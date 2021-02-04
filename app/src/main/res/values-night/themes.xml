@@ -8,7 +8,7 @@
 
     <style name="Theme.MobileKKM.Launcher">
         <item name="android:statusBarColor">@color/color_background</item>
-        <item name="android:navigationBarColor">@color/color_primary</item>
+        <item name="android:windowBackground">@color/color_surface</item>
     </style>
 
 </resources>
