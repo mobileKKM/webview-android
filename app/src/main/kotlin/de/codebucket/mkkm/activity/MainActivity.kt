@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.WindowManager
 import android.webkit.*
 import android.widget.Toast
 
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private var mFilePathCallback: ValueCallback<Array<Uri>>? = null
+    private var mBrightnessToggled = false
     private var mBackPressed: Long = 0
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -41,7 +43,18 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action",null).show()
+            val layout = window.attributes
+
+            if (!mBrightnessToggled) {
+                layout.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_FULL
+            } else {
+                layout.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE
+            }
+
+            mBrightnessToggled = !mBrightnessToggled
+            window.attributes = layout
+
+            binding.fab.setImageResource(if (mBrightnessToggled) R.drawable.ic_lightbulb_on else R.drawable.ic_lightbulb_off)
         }
 
         val webview = binding.webview

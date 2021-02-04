@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:contentDescription="@string/fab_brightness"
+        android:tooltipText="@string/fab_brightness"
         app:backgroundTint="@color/color_secondary"
         app:srcCompat="@drawable/ic_lightbulb_off" />
 
