@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name" translatable="false">mobileKKM</string>
     <string name="app_description">Unofficial Android app for the mobile KKM ticketing webapp.</string>
@@ -14,6 +15,11 @@
     <string name="snackbar_retry">Try again</string>
     <string name="press_back_again">Press \"back\" again to exit</string>
     <string name="fab_brightness">Brighten up the screen</string>
+
+    <!-- Update notifications -->
+    <string name="update_notification_channel">App updates</string>
+    <string name="update_notification_title">User action required</string>
+    <string name="update_notification_message">From 31.01. the new version of mKKM system no longer works with the old version of the app, you need to log in again and pair the ticket with the new system.</string>
 
     <!-- Attribouter screen -->
     <string name="about_contact_us">Contact us</string>

@@ -15,6 +15,11 @@
     <string name="press_back_again">Naciśnij ponownie \"wstecz\", aby wyjść</string>
     <string name="fab_brightness">Rozjaśnij ekran</string>
 
+    <!-- Update notifications -->
+    <string name="update_notification_channel">Aktualizacje aplikacji</string>
+    <string name="update_notification_title">Wymagana akcja użytkownika</string>
+    <string name="update_notification_message">Od dnia 31.01. nowa wersja systemu mKKM nie działa dłużej z starą wersją aplikacji, należy zalogować się ponownie i powiązać bilet z nowym systemem.</string>
+
     <!-- Attribouter screen -->
     <string name="about_contact_us">Napisz do nas</string>
     <string name="about_facebook_like">Polub nas</string>

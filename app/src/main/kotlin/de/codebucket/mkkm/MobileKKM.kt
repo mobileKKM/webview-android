@@ -33,16 +33,14 @@ class MobileKKM : Application() {
 
         // Create notification channel on Android O
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // TODO createNotificationChannel()
+            createNotificationChannel()
         }
     }
 
     @TargetApi(Build.VERSION_CODES.O)
     private fun createNotificationChannel() {
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-        val updateChannel = NotificationChannel(Const.CHANNEL_ID, "dd", NotificationManager.IMPORTANCE_HIGH)
-        updateChannel.description = "dd"
-        updateChannel.vibrationPattern = longArrayOf(0, 100, 100, 100)
+        val updateChannel = NotificationChannel(Const.CHANNEL_ID, getString(R.string.update_notification_channel), NotificationManager.IMPORTANCE_HIGH)
         notificationManager.createNotificationChannel(updateChannel)
     }
 
