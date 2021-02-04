@@ -23,6 +23,10 @@
     <color name="color_on_surface">#000000</color>
     <color name="color_on_error">#FFFFFF</color>
 
+    <!-- Fallback colors -->
+    <color name="toolbar_color">@color/color_primary</color>
+    <color name="status_bar_color">@color/color_primary_variant</color>
+
     <!-- Attribouter theme colors -->
     <color name="attribouter_colorPrimary">@color/color_primary</color>
     <color name="attribouter_colorPrimaryDark">@color/color_primary_variant</color>

@@ -3,10 +3,10 @@ package de.codebucket.mkkm.activity
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
 import android.view.WindowManager
@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 import com.google.android.material.snackbar.Snackbar
 
+import de.codebucket.mkkm.KKMWebViewClient
 import de.codebucket.mkkm.MobileKKM
 import de.codebucket.mkkm.R
 import de.codebucket.mkkm.databinding.ActivityMainBinding
@@ -61,7 +62,7 @@ class MainActivity : AppCompatActivity() {
 
         val webview = binding.webview
         webview.webChromeClient = UploadWebChromeClient()
-        webview.webViewClient = KKMWebViewClient()
+        webview.webViewClient = KKMWebViewClient(this, binding)
 
         // Allow 3rd party cookies, otherwise remember me won't work
         CookieManager.getInstance().setAcceptCookie(true);
@@ -154,46 +155,39 @@ class MainActivity : AppCompatActivity() {
         super.onBackPressed();
     }
 
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+
+        // Don't continue if someone tried to call activity without url
+        if (intent == null || intent.data == null) {
+            return;
+        }
+
+        var data = intent.data!!
+
+        // Check if it contains both id and result parameters
+        if (data.getQueryParameter("id") == null || data.getQueryParameter("result") == null) {
+            Snackbar.make(binding.swipe, R.string.no_payment, Snackbar.LENGTH_LONG).show();
+            return;
+        }
+
+        when (data.getQueryParameter("result")) {
+            "ok" -> Snackbar.make(binding.swipe, R.string.payment_complete, Snackbar.LENGTH_LONG).show()
+            "error" -> Snackbar.make(binding.swipe, R.string.payment_error, Snackbar.LENGTH_LONG).show()
+        }
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            binding.webview.clearCache(true)
+            binding.webview.reload()
+        }, 500L)
+    }
+
     override fun onPause() {
         super.onPause()
         CookieManager.getInstance().flush()
     }
 
-    private inner class KKMWebViewClient : WebViewClient() {
-
-        override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-            super.onPageStarted(view, url, favicon)
-            binding.swipe.isEnabled = true
-            binding.swipe.isRefreshing = true
-        }
-
-        override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
-            super.onReceivedError(view, request, error)
-
-            // Ignore error if it isn't our main page
-            if (!request!!.isForMainFrame) {
-                return
-            }
-
-            binding.swipe.isRefreshing = false
-            binding.swipe.isEnabled = false
-
-            Snackbar.make(binding.swipe, R.string.error_no_network, Snackbar.LENGTH_INDEFINITE)
-                .setAction(R.string.snackbar_retry) {
-                    view?.reload()
-                }
-                .setActionTextColor(Color.YELLOW)
-                .show()
-        }
-
-        override fun onPageFinished(view: WebView?, url: String?) {
-            super.onPageFinished(view, url)
-            binding.swipe.isRefreshing = false
-            binding.swipe.isEnabled = false
-        }
-    }
-
-    private inner class UploadWebChromeClient : WebChromeClient() {
+    inner class UploadWebChromeClient : WebChromeClient() {
 
         override fun onShowFileChooser(webView: WebView?, filePathCallback: ValueCallback<Array<Uri>>?, fileChooserParams: FileChooserParams?): Boolean {
             if (mFilePathCallback != null) {
