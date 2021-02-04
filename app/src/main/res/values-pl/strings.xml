@@ -17,6 +17,9 @@
     <string name="fab_prompt_title">Rozjaśnij ekran</string>
     <string name="fab_prompt_message">Stuknij w żarówkę, aby rozjaśnić ekran podczas kontroli biletów</string>
 
+    <!-- Payment related strings -->
+    <string name="no_browser_activity">Nie znaleziono żadnej aplikacji obsługującej adresy URL</string>
+
     <!-- Update notifications -->
     <string name="update_notification_channel">Aktualizacje aplikacji</string>
     <string name="update_notification_title">Wymagana akcja użytkownika</string>
