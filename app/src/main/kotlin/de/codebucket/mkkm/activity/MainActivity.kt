@@ -5,6 +5,8 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
 import android.view.WindowManager
@@ -12,6 +14,8 @@ import android.webkit.*
 import android.widget.Toast
 
 import androidx.appcompat.app.AppCompatActivity
+
+import com.google.android.material.snackbar.Snackbar
 
 import de.codebucket.mkkm.KKMWebViewClient
 import de.codebucket.mkkm.MobileKKM
@@ -149,6 +153,33 @@ class MainActivity : AppCompatActivity() {
         }
 
         super.onBackPressed();
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+
+        // Don't continue if someone tried to call activity without url
+        if (intent == null || intent.data == null) {
+            return;
+        }
+
+        var data = intent.data!!
+
+        // Check if it contains both id and result parameters
+        if (data.getQueryParameter("id") == null || data.getQueryParameter("result") == null) {
+            Snackbar.make(binding.swipe, R.string.no_payment, Snackbar.LENGTH_LONG).show();
+            return;
+        }
+
+        when (data.getQueryParameter("result")) {
+            "ok" -> Snackbar.make(binding.swipe, R.string.payment_complete, Snackbar.LENGTH_LONG).show()
+            "error" -> Snackbar.make(binding.swipe, R.string.payment_error, Snackbar.LENGTH_LONG).show()
+        }
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            binding.webview.clearCache(true)
+            binding.webview.reload()
+        }, 500L)
     }
 
     override fun onPause() {

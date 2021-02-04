@@ -20,6 +20,9 @@
 
     <!-- Payment related strings -->
     <string name="no_browser_activity">No browser app found</string>
+    <string name="no_payment">This payment cannot be recognized</string>
+    <string name="payment_complete">Payment has been completed</string>
+    <string name="payment_error">Payment failed or was cancelled</string>
 
     <!-- Update notifications -->
     <string name="update_notification_channel">App updates</string>
