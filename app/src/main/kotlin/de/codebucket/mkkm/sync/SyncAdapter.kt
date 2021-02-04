@@ -36,11 +36,6 @@ class SyncAdapter @JvmOverloads constructor(
     ) {
         Log.d(Const.TAG, "Starting sync...");
 
-        val accounts = mAccountManager.getAccountsByType(AuthenticatorService.ACCOUNT_TYPE)
-        if (accounts.isEmpty()) {
-            return
-        }
-
         val intent = Intent(context, SplashActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
         }
@@ -56,13 +51,11 @@ class SyncAdapter @JvmOverloads constructor(
             notify(Const.NOTIFICATION_ID, builder.build())
         }
 
-        accounts.forEach { account ->
-            if (Build.VERSION.SDK_INT >= 22) {
-                mAccountManager.removeAccount(account, null, null, null)
-            } else {
-                // noinspection deprecation
-                mAccountManager.removeAccount(account, null, null)
-            }
+        if (Build.VERSION.SDK_INT >= 22) {
+            mAccountManager.removeAccount(account, null, null, null)
+        } else {
+            // noinspection deprecation
+            mAccountManager.removeAccount(account, null, null)
         }
 
         Log.d(Const.TAG, "Sync finished!");
