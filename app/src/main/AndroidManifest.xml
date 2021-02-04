@@ -21,6 +21,7 @@
 
         <activity
             android:name=".activity.SplashActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.MobileKKM.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
