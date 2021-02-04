@@ -16,10 +16,9 @@ import androidx.appcompat.app.AppCompatActivity
 
 import com.google.android.material.snackbar.Snackbar
 
-import de.codebucket.mkkm.BuildConfig
+import de.codebucket.mkkm.MobileKKM
 import de.codebucket.mkkm.R
 import de.codebucket.mkkm.databinding.ActivityMainBinding
-import me.jfenn.attribouter.Attribouter
 
 class MainActivity : AppCompatActivity() {
 
@@ -49,6 +48,10 @@ class MainActivity : AppCompatActivity() {
         webview.webChromeClient = UploadWebChromeClient()
         webview.webViewClient = KKMWebViewClient()
 
+        // Allow 3rd party cookies, otherwise remember me won't work
+        CookieManager.getInstance().setAcceptCookie(true);
+        CookieManager.getInstance().setAcceptThirdPartyCookies(webview, true)
+
         // Set webview settings for webapps
         webview.settings.displayZoomControls = false
         webview.settings.javaScriptEnabled = true
@@ -56,8 +59,12 @@ class MainActivity : AppCompatActivity() {
         webview.settings.setAppCacheEnabled(true)
         webview.settings.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
 
+        if (MobileKKM.isDebug) {
+            WebView.setWebContentsDebuggingEnabled(true);
+        }
+
         // Load the app
-        webview.loadUrl("https://m.kkm.krakow.pl/auth/login")
+        webview.loadUrl("https://m.kkm.krakow.pl")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -115,6 +122,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         super.onBackPressed();
+    }
+
+    override fun onPause() {
+        super.onPause()
+        CookieManager.getInstance().flush()
     }
 
     private inner class KKMWebViewClient : WebViewClient() {
