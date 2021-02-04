@@ -81,6 +81,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Load the app
+        webview.clearCache(true)
         webview.loadUrl("https://m.kkm.krakow.pl")
 
         val preferences = MobileKKM.preferences
