@@ -14,6 +14,7 @@ import android.webkit.*
 import android.widget.Toast
 
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 
 import com.google.android.material.snackbar.Snackbar
 
@@ -46,6 +47,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
+        // Setup layout
+        val swipe = binding.swipe
+        swipe.setColorSchemeColors(ContextCompat.getColor(this, R.color.color_secondary))
+        swipe.isRefreshing = false
+        swipe.isEnabled = false
+
         binding.fab.setOnClickListener {
             val layout = window.attributes
 
@@ -63,7 +70,7 @@ class MainActivity : AppCompatActivity() {
 
         val webview = binding.webview
         webview.webChromeClient = UploadWebChromeClient()
-        webview.webViewClient = KKMWebViewClient(this, binding)
+        webview.webViewClient = KKMWebViewClient(this, swipe)
 
         // Allow 3rd party cookies, otherwise remember me won't work
         CookieManager.getInstance().setAcceptCookie(true)

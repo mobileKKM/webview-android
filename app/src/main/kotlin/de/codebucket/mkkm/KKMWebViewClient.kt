@@ -14,13 +14,13 @@ import android.widget.Toast
 import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
 import com.google.android.material.snackbar.Snackbar
 
-import de.codebucket.mkkm.databinding.ActivityMainBinding
 import de.codebucket.mkkm.util.TPayPayment
 
-class KKMWebViewClient(var context: Context, var binding: ActivityMainBinding) : WebViewClient() {
+class KKMWebViewClient(var context: Context, var swipe: SwipeRefreshLayout) : WebViewClient() {
 
     object Const {
         const val TAG = "KKMWebViewClient"
@@ -30,8 +30,8 @@ class KKMWebViewClient(var context: Context, var binding: ActivityMainBinding) :
     override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
         super.onPageStarted(view, url, favicon)
 
-        binding.swipe.isEnabled = true
-        binding.swipe.isRefreshing = true
+        swipe.isEnabled = true
+        swipe.isRefreshing = true
     }
 
     override fun onLoadResource(view: WebView?, url: String?) {
@@ -70,10 +70,10 @@ class KKMWebViewClient(var context: Context, var binding: ActivityMainBinding) :
             return
         }
 
-        binding.swipe.isRefreshing = false
-        binding.swipe.isEnabled = false
+        swipe.isRefreshing = false
+        swipe.isEnabled = false
 
-        Snackbar.make(binding.swipe, R.string.error_no_network, Snackbar.LENGTH_INDEFINITE)
+        Snackbar.make(swipe, R.string.error_no_network, Snackbar.LENGTH_INDEFINITE)
             .setAction(R.string.snackbar_retry) {
                 view?.reload()
             }
@@ -84,8 +84,8 @@ class KKMWebViewClient(var context: Context, var binding: ActivityMainBinding) :
     override fun onPageFinished(view: WebView?, url: String?) {
         super.onPageFinished(view, url)
 
-        binding.swipe.isRefreshing = false
-        binding.swipe.isEnabled = false
+        swipe.isRefreshing = false
+        swipe.isEnabled = false
     }
 
     private fun buildColorSchemeParams(): CustomTabColorSchemeParams {
