@@ -2,6 +2,8 @@ package de.codebucket.mkkm.activity
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.ActivityNotFoundException
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -13,6 +15,7 @@ import android.view.WindowManager
 import android.webkit.*
 import android.widget.Toast
 
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 
@@ -22,6 +25,7 @@ import de.codebucket.mkkm.KKMWebViewClient
 import de.codebucket.mkkm.MobileKKM
 import de.codebucket.mkkm.R
 import de.codebucket.mkkm.databinding.ActivityMainBinding
+import de.codebucket.mkkm.util.FacebookPage
 
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt
 
@@ -90,6 +94,7 @@ class MainActivity : AppCompatActivity() {
         // Load the app
         webview.loadUrl("https://m.kkm.krakow.pl")
 
+        // Show tutorial prompt on first launch only
         val preferences = MobileKKM.preferences
         if (!preferences.getBoolean("tutorial_done", false) || MobileKKM.isDebug) {
             MaterialTapTargetPrompt.Builder(this@MainActivity)
@@ -100,6 +105,27 @@ class MainActivity : AppCompatActivity() {
                 .setPromptStateChangeListener { _: MaterialTapTargetPrompt, state: Int ->
                     if (state == MaterialTapTargetPrompt.STATE_FOCAL_PRESSED || state == MaterialTapTargetPrompt.STATE_DISMISSING) {
                         preferences.edit().putBoolean("tutorial_done", true).apply()
+                    }
+                }
+                .show()
+            return
+        }
+
+        // Show facebook dialog on second run and only if it hasn't been shown yet
+        if (!preferences.getBoolean("facebook_dialog", false)) {
+            preferences.edit().putBoolean("facebook_dialog", true).apply();
+            AlertDialog.Builder(this)
+                .setTitle(R.string.dialog_facebook_title)
+                .setMessage(R.string.dialog_facebook_message)
+                .setNegativeButton(R.string.dialog_cancel, null)
+                .setPositiveButton(R.string.dialog_ok) { _: DialogInterface, _: Int ->
+                    try {
+                        val facebookUrl = FacebookPage.getFacebookPageUrl(this@MainActivity)
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(facebookUrl))
+                        startActivity(intent)
+                    } catch (ex: ActivityNotFoundException) {
+                        // Believe me, this actually happens.
+                        Toast.makeText(this@MainActivity, R.string.no_browser_activity, Toast.LENGTH_SHORT).show()
                     }
                 }
                 .show()

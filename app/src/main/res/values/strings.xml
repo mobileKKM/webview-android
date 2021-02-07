@@ -19,6 +19,12 @@
     <string name="fab_prompt_message">Tap the lightbulb to brighten up the display during ticket control</string>
     <string name="loading_problem">Problem loading the page?</string>
 
+    <!-- Facebook dialog -->
+    <string name="dialog_facebook_title">Facebook</string>
+    <string name="dialog_facebook_message">Like our Facebook page to get the latest updates on app development.</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Cancel</string>
+
     <!-- Payment related strings -->
     <string name="no_browser_activity">No browser app found</string>
     <string name="no_payment">This payment cannot be recognized</string>

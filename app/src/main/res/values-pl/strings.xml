@@ -18,6 +18,12 @@
     <string name="fab_prompt_message">Stuknij w żarówkę, aby rozjaśnić ekran podczas kontroli biletów</string>
     <string name="loading_problem">Problem z ładowaniem strony?</string>
 
+    <!-- Facebook dialog -->
+    <string name="dialog_facebook_title">Facebook</string>
+    <string name="dialog_facebook_message">Polub naszą stronę na Facebooku, aby otrzymywać najnowsze informacje na temat rozwoju aplikacji.</string>
+    <string name="dialog_ok">Ok</string>
+    <string name="dialog_cancel">Anuluj</string>
+
     <!-- Payment related strings -->
     <string name="no_browser_activity">Nie znaleziono żadnej aplikacji obsługującej adresy URL</string>
     <string name="no_payment">Nie można rozpoznać tej płatności</string>
