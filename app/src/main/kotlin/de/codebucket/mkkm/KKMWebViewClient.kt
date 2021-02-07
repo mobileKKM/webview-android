@@ -4,6 +4,8 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
@@ -21,6 +23,8 @@ import com.google.android.material.snackbar.Snackbar
 import de.codebucket.mkkm.util.TPayPayment
 
 class KKMWebViewClient(var context: Context, var swipe: SwipeRefreshLayout) : WebViewClient() {
+
+    private var firstLoad = true
 
     object Const {
         const val TAG = "KKMWebViewClient"
@@ -86,6 +90,19 @@ class KKMWebViewClient(var context: Context, var swipe: SwipeRefreshLayout) : We
 
         swipe.isRefreshing = false
         swipe.isEnabled = false
+
+        if (firstLoad) {
+            firstLoad = false
+            Handler(Looper.getMainLooper()).postDelayed({
+                Snackbar.make(swipe, R.string.loading_problem, 8500)
+                    .setAction(R.string.action_clear_cache) {
+                        view?.clearCache(true)
+                        view?.reload()
+                    }
+                    .setActionTextColor(Color.YELLOW)
+                    .show()
+            }, 1500L)
+        }
     }
 
     private fun buildColorSchemeParams(): CustomTabColorSchemeParams {
