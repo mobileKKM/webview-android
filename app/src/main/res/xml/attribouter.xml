@@ -4,8 +4,7 @@
         icon="@mipmap/ic_launcher"
         title="@string/app_name"
         description="@string/app_description"
-        playStoreUrl="https://play.google.com/store/apps/details?id=de.codebucket.mkkm"
-        websiteUrl="https://mobilekkm.codebucket.de">
+        playStoreUrl="https://play.google.com/store/apps/details?id=de.codebucket.mkkm">
 
         <LinkWedge
             name="@string/about_facebook_like"
@@ -16,6 +15,11 @@
             name="@string/about_contact_us"
             icon="@drawable/ic_messenger"
             url="https://m.me/getmobilekkm" />
+
+        <LinkWedge
+            name="@string/attribouter_title_git"
+            icon="@drawable/attribouter_ic_github"
+            url="https://github.com/mobileKKM" />
 
     </AppWedge>
 
