@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Load the app
-        webview.loadUrl("https://m.kkm.krakow.pl")
+        webview.loadUrl("https://m.kkm.krakow.pl/tickets")
 
         // Show tutorial prompt on first launch only
         val preferences = MobileKKM.preferences
