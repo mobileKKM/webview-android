@@ -1,0 +1,5 @@
+Kolejna aktualizacja, co nowego?
+
+- Dodano obejście problemu braku nośnika mKKM po otwarciu aplikacji
+
+Miłego dnia i spokojnej podróży!

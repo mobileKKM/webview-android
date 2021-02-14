@@ -1,0 +1,9 @@
+<b>Konta Kart Krakowskich z systemu bilety.kkm.krakow.pl nie są obsługiwane przez tą aplikację, tylko konta zarejestrowane na m.kkm.krakow.pl!</b>
+
+Aplikacja umożliwia ulepszoną obsługę mobilnej Krakowskiej Karty Miejskiej (m.kkm.krakow.pl) na telefonie.
+
+Dodatkowo oferuje automatyczne logowanie po uruchomieniu oraz w przyszłości możliwość tworzenia kopii zapasowej profilu w razie potrzeby lub awarii urządzenia.
+
+mobileKKM jest <b>niezależnie od KKM i MPK Kraków opracowaną</b> aplikacją "open-source" z kodem zródłowym dostępnym na serwisie GitHub. Niektóre funkcje mogą być jeszcze niedostępne.
+
+Kod źródłowy: https://github.com/mobileKKM

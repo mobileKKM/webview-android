@@ -1,0 +1,5 @@
+Another update, what's new?
+
+- Added workaround for missing tickets after launching the application
+
+Have a great day and a peaceful journey!
