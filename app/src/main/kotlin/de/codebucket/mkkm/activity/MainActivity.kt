@@ -73,6 +73,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         val webview = binding.webview
+        webview.setBackgroundColor(ContextCompat.getColor(this, R.color.color_background))
         webview.webChromeClient = UploadWebChromeClient()
         webview.webViewClient = KKMWebViewClient(this, swipe)
 

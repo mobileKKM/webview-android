@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.View
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
@@ -94,6 +95,11 @@ class KKMWebViewClient(var context: Context, var swipe: SwipeRefreshLayout) : We
     override fun onPageFinished(view: WebView?, url: String?) {
         super.onPageFinished(view, url)
 
+        // Show webview after it has loaded first time
+        if (view!!.visibility == View.GONE) {
+            view.visibility = View.VISIBLE
+        }
+
         swipe.isRefreshing = false
         swipe.isEnabled = false
 
@@ -102,8 +108,8 @@ class KKMWebViewClient(var context: Context, var swipe: SwipeRefreshLayout) : We
             Handler(Looper.getMainLooper()).postDelayed({
                 Snackbar.make(swipe, R.string.loading_problem, 8500)
                     .setAction(R.string.action_clear_cache) {
-                        view?.clearCache(true)
-                        view?.reload()
+                        view.clearCache(true)
+                        view.reload()
                     }
                     .setActionTextColor(Color.YELLOW)
                     .show()
