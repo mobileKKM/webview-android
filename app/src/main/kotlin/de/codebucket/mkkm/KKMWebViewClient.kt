@@ -2,8 +2,10 @@ package de.codebucket.mkkm
 
 import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
@@ -30,7 +32,7 @@ class KKMWebViewClient(var context: Context, var swipe: SwipeRefreshLayout) : We
 
     object Const {
         const val TAG = "KKMWebViewClient"
-        const val PAYMENT_URL = "https://secure.tpay.com/?id=27659"
+        const val PAYMENT_HOST = "secure.tpay.com"
     }
 
     override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
@@ -40,35 +42,6 @@ class KKMWebViewClient(var context: Context, var swipe: SwipeRefreshLayout) : We
         swipe.isRefreshing = true
 
         loadSuccess = true
-    }
-
-    override fun onLoadResource(view: WebView?, url: String?) {
-        super.onLoadResource(view, url)
-
-        // Ignore if webview is destroyed or url is somehow null
-        if (view == null || url == null) {
-            return
-        }
-
-        if (url.startsWith(Const.PAYMENT_URL)) {
-            view.stopLoading()
-
-            val returnUrl = "mobilekkm://payment?id=%s&result=%s"
-            val paymentBuilder = TPayPayment.Builder().fromPaymentLink(url)
-            paymentBuilder.setReturnUrl(String.format(returnUrl, paymentBuilder.crc, "ok"))
-            paymentBuilder.setReturnErrorUrl(String.format(returnUrl, paymentBuilder.crc, "error"))
-            paymentBuilder.setOnline(1.toString())
-
-            try {
-                val intent = buildCustomTabsIntent()
-                intent.launchUrl(context, paymentBuilder.build())
-            } catch (ex: ActivityNotFoundException) {
-                Log.e(Const.TAG, "No browser found!")
-                Toast.makeText(context, R.string.no_browser_activity, Toast.LENGTH_SHORT).show()
-            }
-
-            view.loadUrl("https://m.kkm.krakow.pl/tickets")
-        }
     }
 
     override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
@@ -115,6 +88,52 @@ class KKMWebViewClient(var context: Context, var swipe: SwipeRefreshLayout) : We
                     .show()
             }, 1500L)
         }
+    }
+
+    override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+        // Ignore request if it isn't our main page
+        if (request == null || !request.isForMainFrame) {
+            return false
+        }
+
+        when (request.url.scheme) {
+            "http", "https" ->  {
+                if (request.url.host == Const.PAYMENT_HOST) {
+                    interceptPaymentUrl(view, request.url)
+                    return true
+                }
+            }
+            "mailto" -> {
+                val intent = Intent(Intent.ACTION_SENDTO, request.url)
+                context.startActivity(intent)
+                return true
+            }
+            "tel" -> {
+                val intent = Intent(Intent.ACTION_DIAL, request.url)
+                context.startActivity(intent)
+                return true
+            }
+        }
+
+        return super.shouldOverrideUrlLoading(view, request)
+    }
+
+    private fun interceptPaymentUrl(view: WebView?, url: Uri?) {
+        val returnUrl = "mobilekkm://payment?id=%s&result=%s"
+        val paymentBuilder = TPayPayment.Builder().fromPaymentLink(url.toString())
+        paymentBuilder.setReturnUrl(String.format(returnUrl, paymentBuilder.crc, "ok"))
+        paymentBuilder.setReturnErrorUrl(String.format(returnUrl, paymentBuilder.crc, "error"))
+        paymentBuilder.setOnline(1.toString())
+
+        try {
+            val intent = buildCustomTabsIntent()
+            intent.launchUrl(context, paymentBuilder.build())
+        } catch (ex: ActivityNotFoundException) {
+            Log.e(Const.TAG, "No browser found!")
+            Toast.makeText(context, R.string.no_browser_activity, Toast.LENGTH_SHORT).show()
+        }
+
+        view?.loadUrl("https://m.kkm.krakow.pl/tickets")
     }
 
     private fun buildColorSchemeParams(): CustomTabColorSchemeParams {
