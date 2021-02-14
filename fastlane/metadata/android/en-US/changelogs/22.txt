@@ -1,0 +1,6 @@
+Another update, what's new?
+
+- Added support for PDF files to instructions and terms of use
+- Fixed white screen during loading with dark theme
+
+Have a great day and a peaceful journey!

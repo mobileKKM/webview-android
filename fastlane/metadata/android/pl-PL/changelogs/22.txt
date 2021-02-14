@@ -1,0 +1,6 @@
+Kolejna aktualizacja, co nowego?
+
+- Dodano obsługę plików PDF do instrukcji i regulaminów
+- Naprawiono biały ekran podczas ładowania z ciemnym motywem
+
+Miłego dnia i spokojnej podróży!

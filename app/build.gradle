@@ -26,8 +26,8 @@ android {
         def githubToken = localProps.getProperty('githubToken') ?: '"' + System.getenv("GITHUB_TOKEN") + '"'
         buildConfigField "String", "GITHUB_TOKEN", githubToken
 
-        versionCode 21
-        versionName "1.6.0"
+        versionCode 22
+        versionName "1.7.0"
     }
 
     signingConfigs {
