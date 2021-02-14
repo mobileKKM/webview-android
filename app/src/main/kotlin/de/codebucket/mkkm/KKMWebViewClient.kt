@@ -25,6 +25,7 @@ import de.codebucket.mkkm.util.TPayPayment
 class KKMWebViewClient(var context: Context, var swipe: SwipeRefreshLayout) : WebViewClient() {
 
     private var firstLoad = true
+    private var loadSuccess = true
 
     object Const {
         const val TAG = "KKMWebViewClient"
@@ -36,11 +37,14 @@ class KKMWebViewClient(var context: Context, var swipe: SwipeRefreshLayout) : We
 
         swipe.isEnabled = true
         swipe.isRefreshing = true
+
+        loadSuccess = true
     }
 
     override fun onLoadResource(view: WebView?, url: String?) {
         super.onLoadResource(view, url)
 
+        // Ignore if webview is destroyed or url is somehow null
         if (view == null || url == null) {
             return
         }
@@ -77,6 +81,8 @@ class KKMWebViewClient(var context: Context, var swipe: SwipeRefreshLayout) : We
         swipe.isRefreshing = false
         swipe.isEnabled = false
 
+        loadSuccess = false
+
         Snackbar.make(swipe, R.string.error_no_network, Snackbar.LENGTH_INDEFINITE)
             .setAction(R.string.snackbar_retry) {
                 view?.reload()
@@ -91,7 +97,7 @@ class KKMWebViewClient(var context: Context, var swipe: SwipeRefreshLayout) : We
         swipe.isRefreshing = false
         swipe.isEnabled = false
 
-        if (firstLoad) {
+        if (firstLoad && loadSuccess) {
             firstLoad = false
             Handler(Looper.getMainLooper()).postDelayed({
                 Snackbar.make(swipe, R.string.loading_problem, 8500)
