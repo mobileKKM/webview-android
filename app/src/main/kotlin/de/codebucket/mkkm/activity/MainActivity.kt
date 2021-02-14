@@ -77,6 +77,17 @@ class MainActivity : AppCompatActivity() {
         webview.webChromeClient = UploadWebChromeClient()
         webview.webViewClient = KKMWebViewClient(this, swipe)
 
+        // Intercept PDF files and open them with Google Drive or download via browser
+        webview.setDownloadListener { url: String, _: String, _: String, mimetype: String, _: Long ->
+            if (mimetype == "application/pdf") {
+                try {
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+                } catch (ex: ActivityNotFoundException) {
+                    Toast.makeText(this@MainActivity, R.string.no_browser_activity, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
         // Allow 3rd party cookies, otherwise remember me won't work
         CookieManager.getInstance().setAcceptCookie(true)
         CookieManager.getInstance().setAcceptThirdPartyCookies(webview, true)
