@@ -99,8 +99,7 @@ class KKMWebViewClient(var context: Context, var swipe: SwipeRefreshLayout) : We
         when (request.url.scheme) {
             "http", "https" ->  {
                 if (request.url.host == Const.PAYMENT_HOST) {
-                    interceptPaymentUrl(view, request.url)
-                    return true
+                    return interceptPaymentUrl(view, request.url)
                 }
             }
             "mailto" -> {
@@ -118,7 +117,11 @@ class KKMWebViewClient(var context: Context, var swipe: SwipeRefreshLayout) : We
         return super.shouldOverrideUrlLoading(view, request)
     }
 
-    private fun interceptPaymentUrl(view: WebView?, url: Uri?) {
+    private fun interceptPaymentUrl(view: WebView?, url: Uri?): Boolean {
+        if (url == null || url.encodedPath != "/") {
+            return false
+        }
+
         val returnUrl = "mobilekkm://payment?id=%s&result=%s"
         val paymentBuilder = TPayPayment.Builder().fromPaymentLink(url.toString())
         paymentBuilder.setReturnUrl(String.format(returnUrl, paymentBuilder.crc, "ok"))
@@ -134,6 +137,7 @@ class KKMWebViewClient(var context: Context, var swipe: SwipeRefreshLayout) : We
         }
 
         view?.loadUrl("https://m.kkm.krakow.pl/tickets")
+        return true
     }
 
     private fun buildColorSchemeParams(): CustomTabColorSchemeParams {
