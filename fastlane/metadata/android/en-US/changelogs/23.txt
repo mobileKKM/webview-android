@@ -1,0 +1,6 @@
+Another update, what's new?
+
+- Fixed app crash when purchasing 5+1 ticket
+- Improved app opening time
+
+Have a great day and a peaceful journey!

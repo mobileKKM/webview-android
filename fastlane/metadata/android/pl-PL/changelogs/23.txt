@@ -1,0 +1,6 @@
+Kolejna aktualizacja, co nowego?
+
+- Naprawiono awarię aplikacji podczas zakupu biletu 5+1
+- Przyśpieszono czas otwierania aplikacji
+
+Miłego dnia i spokojnej podróży!
