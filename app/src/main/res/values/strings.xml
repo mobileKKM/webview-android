@@ -8,8 +8,9 @@
     <string name="splash_footer">Background footer</string>
 
     <!-- Webview related strings -->
-    <string name="action_about">About app</string>
     <string name="action_clear_cache">Clear cache</string>
+    <string name="action_help">Help</string>
+    <string name="action_about">About app</string>
     <string name="intent_chooser_file">Select file</string>
     <string name="error_no_network">No Internet connection</string>
     <string name="snackbar_retry">Try again</string>

@@ -175,13 +175,17 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_about -> {
-                startActivity(Intent(this@MainActivity, AboutActivity::class.java))
-                true
-            }
             R.id.action_clear_cache -> {
                 binding.webview.clearCache(true)
                 binding.webview.reload()
+                true
+            }
+            R.id.action_help -> {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://m.me/getmobilekkm")))
+                true
+            }
+            R.id.action_about -> {
+                startActivity(Intent(this@MainActivity, AboutActivity::class.java))
                 true
             }
             else -> {

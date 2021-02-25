@@ -7,8 +7,9 @@
     <string name="splash_footer">Stopa tła</string>
 
     <!-- Webview related strings -->
-    <string name="action_about">O aplikacji</string>
     <string name="action_clear_cache">Wyczyść cache</string>
+    <string name="action_help">Pomoc</string>
+    <string name="action_about">O aplikacji</string>
     <string name="intent_chooser_file">Wybierz plik</string>
     <string name="error_no_network">Brak połączenia z Internetem</string>
     <string name="snackbar_retry">Spróbuj ponownie</string>
